@@ -1,18 +1,8 @@
-context("test-retrieve_data.R")
-
-test_that("BacDive database remained unchanged", {
-  expect_equal(
-    download(
-      "https://bacdive.dsmz.de/api/bacdive/bacdive_id/?format=json"
-    )$count,
-    63669
-  )
-})
-
+context("test-bd_retrieve.R")
 
 B_subtilis_IDs <-
   download(
-    "https://bacdive.dsmz.de/api/bacdive/taxon/Bacillus/subtilis/subtilis/?format=json"
+    "https://bacdive.dsmz.de/api/bacdive/taxon/Bacillus/subtilis/?format=json"
   )
 
 test_that("taxon search returns paged results list", {
@@ -35,34 +25,27 @@ test_that("aggregating a set of BacDive URLs works", {
 })
 
 
-test_that("Redirecting 'culturecollectionno' & 'sequence' searches to 'bacdive_id' works (#45)", {
-  expect_identical(
-    retrieve_data(
-      searchTerm = "DSM 319",
-      searchType = "culturecollectionno"
-    ),
-    retrieve_data(
-      searchTerm = "AJ000733",
-      searchType = "sequence"
-    ),
-    retrieve_data(
-      searchTerm = 717,
-      searchType = "bacdive_id"
+test_that(
+  "Redirecting 'culturecollectionno' & 'sequence' searches to 'bacdive_id' works (#45)", {
+    expect_identical(
+      bd_retrieve_by_culture(collection_no = "DSM 319"),
+      bd_retrieve_by_sequence(accession = "AJ000733"),
+      bd_retrieve(id = 717)
     )
-  )
-})
+  }
+)
 
 
 # test set with 2 strains
-Bac_hal <- "Bacillus halotolerans"
-Bac_hal_data <- retrieve_data(searchTerm = Bac_hal)
+rare <- "Acinetobacter courvalinii"
+rare_data <- bd_retrieve_taxon(name = rare)
 
 test_that("extracting a single field from a taxon-wide search works", {
   expect_equal(
-    c("30", "15-45", "32", "37", "28"),
+    c("30", "15-37"),
     unique(unlist(
       purrr::map(
-        .x = Bac_hal_data,
+        .x = rare_data,
         .f = ~ .x$culture_growth_condition$culture_temp$temp
       )
     ))
@@ -71,8 +54,8 @@ test_that("extracting a single field from a taxon-wide search works", {
 
 test_that("any dataset returned by BacDiveR is named with its ID", {
   expect_equal(
-    names(Bac_hal_data),
-    c("1095", "1847")
+    names(rare_data),
+    c("139534", "139535")
   )
   # https://bacdive.dsmz.de/advsearch?advsearch=search&site=advsearch&searchparams%5B73%5D%5Bcontenttype%5D=text&searchparams%5B73%5D%5Btypecontent%5D=exact&searchparams%5B73%5D%5Bsearchterm%5D=Bacillus+halotolerans&csv_bacdive_ids_advsearch=download
 })
@@ -80,13 +63,13 @@ test_that("any dataset returned by BacDiveR is named with its ID", {
 test_that("Normalising invalid JSON whitespace works,
           for both multi- and single-species taxons", {
   expect_type(
-    object = Bac_hal_data,
+    object = rare_data,
     type = "list"
   )
   # https://bacdive.dsmz.de/api/bacdive/bacdive_id/1847/?format=json
   # contains "medium_composition": "Name: ISP 2 / Yeast Malt Agar (5265); 5265\r\nComposition
 
-  expect_type(retrieve_data("Roseomonas aerilata"),
+  expect_type(bd_retrieve_taxon("Roseomonas aerilata"),
     type = "list"
   )
   # https://bacdive.dsmz.de/api/bacdive/bacdive_id/76/?format=json
@@ -96,12 +79,11 @@ test_that("Normalising invalid JSON whitespace works,
 })
 
 test_that("Trying to download a non-existent dataset yields warnings & empty list", {
-  expect_warning(non_existant <-
-    retrieve_data(searchTerm = 999999999, searchType = "bacdive_id"))
-  expect_warning(blablub <- retrieve_data(searchTerm = "bla blub"))
+  expect_warning(non_existant <- bd_retrieve(id = 999999999))
+  expect_warning(blablub <- bd_retrieve_taxon(name = "bla blub"))
   expect_equal(blablub, non_existant, list())
 })
 
 test_that("Fuzzing of searchTerm parameter produces error", {
-  expect_error(retrieve_data(Bac_hal, searchType = sample(letters, 1)))
+  expect_error(bd_retrieve_data(Bac_hal, searchType = sample(letters, 1)))
 })
