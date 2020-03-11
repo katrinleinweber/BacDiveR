@@ -1,4 +1,5 @@
 # BacDiveR [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1308060.svg)](https://zenodo.org/record/1308060) [![Travis build status](https://travis-ci.org/TIBHannover/BacDiveR.svg?branch=master)](https://travis-ci.org/TIBHannover/BacDiveR)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkatrinleinweber%2FBacDiveR.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkatrinleinweber%2FBacDiveR?ref=badge_shield)
 
 This R package provides a programmatic interface to the [Bacterial Diversity Metadatabase][BD] of the [DSMZ (German Collection of Microorganisms and Cell Cultures)][DMSZ]. BacDiveR helps you improve your research on bacteria and archaea by providing access to "structured information on [...] their taxonomy, morphology, physiology, cultivation, geographic origin, application, interaction" and more ([Söhngen et al. 2016](#references)). Specifically, you can:
 
@@ -111,3 +112,7 @@ These seem to scrape **all** data, instead of retrieving specific datasets.
   “BacDive in 2019: Bacterial Phenotypic Data for High-Throughput Biodiversity
   Analysis” *Nucleic Acids Research* 
   [doi:10.1093/nar/gky879](https://academic.oup.com/nar/advance-article/5106998).
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkatrinleinweber%2FBacDiveR.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkatrinleinweber%2FBacDiveR?ref=badge_large)
