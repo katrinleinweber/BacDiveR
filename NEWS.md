@@ -1,7 +1,3 @@
-All notable changes to this project will be documented in this file.
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
 ## Unreleased
 
 ### Added
@@ -10,6 +6,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 ### Fixed
 ### Security
+
+
+## BacDiveR 0.9.1
+
+### Fixed
+
+- Expose a previously silent download error (#110; Thanks to @jfy133!)
+
+### Changed
+
+- Repair outdated links in documentation
+- Improve some code sections in minor ways
+
+
+## BacDiveR 0.9.0
+
+All notable changes to this project will be documented in this file.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+### Changed
+
+- NEW API: The deprecations announced in v0.8.0 are now completed: The
+  `bd_retrieve()` family of functions has replaced `retrieve_data()` and
+  `retrieve_search_results()` has been renamed to `bd_retrieve_by_search()`,
+  see #96. **Please update scripts and other downstream code that use BacDiveR.**
+- `purrr` is no longer an imported / required dependency, but only suggested
+  due to use in the [introductory vignette], see #98.
+  
+[introductory vignette]: ../articles/BacDive-ing-in.html#extracting-data-fields
+
+
+## BacDiveR 0.8.1
+
+### Changed
+
+- Warning message about no data being found is more informative now
+- Documentation to follow BacDive's database updates
+- Use pandoc 2.7.2 to generate the website
+
+
+## BacDiveR 0.8.0
+
+### Added
+
+- NEW API: The `bd_retrieve()` family of functions will replace `retrieve_data()`
+  soon. It consists of `bd_retrieve(id = …)`, `bd_retrieve_by_culture(collectionno = …)`,
+  `bd_retrieve_by_sequence(accession = …)` and `bd_retrieve_taxon(name = …)`
+  which is more auto-complete-friendly and should help avoid the internal need
+  to sanitise inputs.
+
+### Deprecated
+
+- `retrieve_data()` has been replaced as described above.
+- `retrieve_search_results()` has been renamed to `bd_retrieve_by_search()`.
+- Both old functions will be removed in the next major version. Please update
+  your BacDiveR-using scripts and other downstream code.
 
 
 ## BacDiveR 0.7.4
@@ -96,7 +149,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   to prevent jsonlite from complaining about invalid encoding (#43). Instead, 
   only `\r`, `\n` and `\t` are repaired to `\\r`, `\\n` and `\\t`, which jsonlite
   expects. This leads to different output (newline & tabs, where previously only
-  spaces occured)! Thus, if you are parsing BacDiveR output in any way, you may
+  spaces occurred)! Thus, if you are parsing BacDiveR output in any way, you may
   need to adjust that. Because I consider this unlikely given the "maturing" status,
   and because no API surface was changed, I don't consider this a major change
   in the [SemVer.org](https://semver.org/) sense.
@@ -114,8 +167,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Don't run all function docu examples, and limit their output on the 
-  [reference](https://tibhannover.github.io/BacDiveR/reference/retrieve_data.html) 
-  [pages](https://tibhannover.github.io/BacDiveR/reference/retrieve_search_results.html)
+  [reference](https://tibhannover.github.io/BacDiveR/reference/bd_retrieve.html)
+  [pages](https://tibhannover.github.io/BacDiveR/reference/bd_retrieve_by_search.html)
   (see #52)
 
 

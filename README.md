@@ -1,10 +1,10 @@
-# BacDiveR [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1308060.svg)](https://zenodo.org/record/1308060) [![Travis build status](https://travis-ci.org/TIBHannover/BacDiveR.svg?branch=master)](https://travis-ci.org/TIBHannover/BacDiveR)
+# BacDiveR [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1308060.svg)](https://zenodo.org/record/1308060) [![Travis build status](https://travis-ci.org/TIBHannover/BacDiveR.svg?branch=master)](https://travis-ci.org/TIBHannover/BacDiveR)  [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/2753/badge)](https://bestpractices.coreinfrastructure.org/projects/2753)
 
-This R package provides a programmatic interface to the [Bacterial Diversity Metadatabase][BD] of the [DSMZ (German Collection of Microorganisms and Cell Cultures)][DMSZ]. BacDiveR helps you improve your research on bacteria and archaea by providing access to "structured information on [...] their taxonomy, morphology, physiology, cultivation, geographic origin, application, interaction" and more ([Söhngen et al. 2016](#references)). Specifically, you can:
+This R package provides a programmatic interface to the [Bacterial Diversity Metadatabase][BD] of the [DSMZ (German Collection of Microorganisms and Cell Cultures)][DMSZ]. BacDiveR helps you improve your research on bacteria and archaea by providing access to "structured information on [...] their taxonomy, morphology, physiology, cultivation, geographic origin, application, interaction" and more ([Söhngen et al. 2016](https://academic.oup.com/nar/article/44/D1/D581/2503137)). Specifically, you can:
 
 - download the BacDive data you need for offline investigation, and
 
-- document your searchers and downloads in `.R` scripts, `.Rmd` files, etc.
+- document your searches and downloads in `.R` scripts, `.Rmd` files, etc.
 
 Thus, BacDiveR can be the basis for a reproducible data analysis pipeline. See [TIBHannover.GitHub.io/BacDiveR][page] for more details, [/news] there for the changelog, and [GitHub.com/TIBHannover/BacDiveR][source] for the latest source code.
 
@@ -25,12 +25,11 @@ Afterwards, remove the above from GitHub. -->
 
 ## Installation
 
-1.  Because the [BacDive API requires registration][reg] please do that first 
+1.  Because the [BacDive Web Service requires registration][reg] please do that first 
     and wait for DSMZ staff to grant you access.
 
 2.  Once you have your login credentials, install the [latest BacDiveR release][releases]
-    from GitHub with: `if(!require('devtools')) install.packages('devtools'); devtools::install_github('TIBHannover/BacDiveR')`. If you want to help test the
-    latest upcoming changes, add `ref = 'development'` there.
+    from GitHub with: `if(!require('devtools')) install.packages('devtools'); devtools::install_github('TIBHannover/BacDiveR')`.
 
 3.  After installing, follow the instructions on the console to save your login
     credentials locally and restart R(Studio) or run `usethis::edit_r_environ()`
@@ -50,20 +49,18 @@ There are two main functions: [`retrieve_data()`][r_d] and [`retrieve_search_res
 Please click on their names to read their docu, and find real-life examples in
 the vignettes ["BacDive-ing in"][dive-in] and ["Pre-Configuring Advanced Searches"][adv-search].
 
-[r_d]: https://tibhannover.github.io/BacDiveR/reference/retrieve_data.html
-[r_s_r]: https://tibhannover.github.io/BacDiveR/reference/retrieve_search_results.html
+[r_d]: https://tibhannover.github.io/BacDiveR/reference/bd_retrieve.html
+[r_s_r]: https://tibhannover.github.io/BacDiveR/reference/bd_retrieve_by_search.html
 [dive-in]: https://tibhannover.github.io/BacDiveR/articles/BacDive-ing-in.html
 [adv-search]: https://tibhannover.github.io/BacDiveR/articles/pre-configuring-advanced-searches-and-retrieving-the-results.html
 
 
-## How to cite
+## How to cite: See [`Cite as` & `Export` on Zenodo][zenodo]
 
-Best execute `citation('BacDiveR')` in the R console and use its output because that
+You can also run `citation('BacDiveR')` in the R console and use its output because that
 ensures you are citing exactly the installed version.
 
-You can also use the `Cite as`
-or `Export` options presented on [Zenodo.org/record/1308060][zenodo]. If you want
-to import [this GitHub repo's metadata][GH] into a reference manager directly, I
+If you want to import [this repo's metadata][GH] into a reference manager directly, I
 recommend [Zotero] and its [GitHub translator][zotGH]. Please double-check, that
 the citation refers to the same version number that you ran your analysis with.
 
